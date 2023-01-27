@@ -1,0 +1,43 @@
+additionalTrustBundlePolicy: Proxyonly
+apiVersion: v1
+baseDomain: tdpc.local
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: {}
+  replicas: 4
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: elyzium
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.250.131.0/24
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  vsphere:
+    apiVIPs:
+    - 10.250.131.1
+    cluster: TDPC-VSAN-Cluster
+    datacenter: TDPC-BSC-Bracknell
+    defaultDatastore: vsanDatastore
+    ingressVIPs:
+    - 10.250.131.2
+    network: dTDPC-VSAN-PAR-Elyzium
+    password:
+    username: 
+    vCenter: vc.tdpc.local
+    resourcePool: /TDPC-BSC-Bracknell/host/TDPC-VSAN-Cluster/Resources/Elyzium-Demo
+publish: External
+pullsecret:
